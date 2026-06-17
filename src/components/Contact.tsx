@@ -4,7 +4,7 @@
  */
 
 import React, { useState } from 'react';
-import { Mail, Linkedin, Github, Send, Sparkles, CheckCircle, Info, CalendarClock } from 'lucide-react';
+import { Mail, Linkedin, Github, Send, CheckCircle, Info } from 'lucide-react';
 import { PERSONAL_INFO } from '../data';
 
 export default function Contact() {
@@ -16,29 +16,71 @@ export default function Contact() {
   });
   
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
-  const [messagesLog, setMessagesLog] = useState<{ name: string; timestamp: string; subject: string }[]>([]);
+  const [emailError, setEmailError] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    if (name === 'email') {
+      setEmailError('');
+    }
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) return;
+    
+    if (!formData.name.trim()) {
+      alert("Name is required");
+      return;
+    }
+    
+    if (!formData.email.trim()) {
+      alert("Email is required");
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email.trim())) {
+      setEmailError('Please enter a valid email address.');
+      return;
+    }
+
+    if (!formData.message.trim()) {
+      alert("Message is required");
+      return;
+    }
 
     setStatus('submitting');
     
-    // Simulate interactive REST trigger callback
-    setTimeout(() => {
-      const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      setMessagesLog((prev) => [
-        { name: formData.name, timestamp, subject: formData.subject || 'Inquiry' },
-        ...prev
-      ]);
-      setStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 1200);
+    try {
+      const formPayload = new FormData();
+      formPayload.append('name', formData.name.trim());
+      formPayload.append('email', formData.email.trim());
+      formPayload.append('subject', formData.subject.trim() || 'New Portfolio Contact Form Submission');
+      formPayload.append('message', formData.message.trim());
+      formPayload.append('_subject', 'New Portfolio Contact Form Submission');
+      formPayload.append('_captcha', 'false');
+      formPayload.append('_template', 'table');
+
+      const response = await fetch('https://formsubmit.co/harshpatelji999@gmail.com', {
+        method: 'POST',
+        body: formPayload,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        throw new Error('Form submission response not okay');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Could not submit the form. Please try again later.');
+      setStatus('idle');
+    }
   };
 
   return (
@@ -65,7 +107,7 @@ export default function Contact() {
         </div>
 
         {/* Balanced asymmetric layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           {/* Left Side: Dynamic Handles */}
           <div className="lg:col-span-5 space-y-8">
@@ -138,24 +180,6 @@ export default function Contact() {
 
             </div>
 
-            {/* Simulated Live Connection Log stream */}
-            {messagesLog.length > 0 && (
-              <div className="p-4 bg-slate-900 border border-white/[0.05] rounded-xl space-y-3">
-                <p className="text-[9px] font-mono text-amber-400 uppercase tracking-wider flex items-center gap-1.5 animate-pulse">
-                  <Sparkles size={8} />
-                  Live client handshakes
-                </p>
-                <div className="space-y-1.5 max-h-[140px] overflow-y-auto">
-                  {messagesLog.map((log, idx) => (
-                    <div key={idx} className="text-[11px] font-mono text-slate-400 flex justify-between items-center bg-white/5 p-2 rounded">
-                      <span>▸ <strong className="text-white">{log.name}</strong> connected</span>
-                      <span>{log.timestamp}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
           </div>
 
           {/* Right Side: Form Block */}
@@ -168,10 +192,10 @@ export default function Contact() {
                     <CheckCircle size={48} />
                   </div>
                   <h4 className="font-display text-2xl font-bold text-white">
-                    Message Dispatched Successfully!
+                    Thank You!
                   </h4>
-                  <p className="font-sans text-xs sm:text-sm text-slate-400 max-w-md mx-auto">
-                    Thanks for reaching out! Your connection has been logged locally in memory. Harsh typically reviews all student and consulting inquiries within 12 hours.
+                  <p className="font-sans text-xs sm:text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
+                    Thank you for reaching out. Your message has been successfully delivered. I will get back to you as soon as possible.
                   </p>
                   <button
                     onClick={() => setStatus('idle')}
@@ -181,7 +205,17 @@ export default function Contact() {
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleFormSubmit} className="space-y-6" id="contact-active-form">
+                <form 
+                  onSubmit={handleFormSubmit} 
+                  action="https://formsubmit.co/harshpatelji999@gmail.com" 
+                  method="POST"
+                  className="space-y-6" 
+                  id="contact-active-form"
+                >
+                  {/* FormSubmit Configuration Fields */}
+                  <input type="hidden" name="_subject" value="New Portfolio Contact Form Submission" />
+                  <input type="hidden" name="_captcha" value="false" />
+                  <input type="hidden" name="_template" value="table" />
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {/* Name */}
@@ -214,8 +248,11 @@ export default function Contact() {
                         value={formData.email}
                         onChange={handleInputChange}
                         placeholder="john@example.com"
-                        className="w-full px-4 py-3 bg-[#0F172A] border border-white/[0.08] focus:border-amber-400 rounded-lg text-white font-sans text-sm outline-none transition-all"
+                        className={`w-full px-4 py-3 bg-[#0F172A] border ${emailError ? 'border-rose-500' : 'border-white/[0.08]'} focus:border-amber-400 rounded-lg text-white font-sans text-sm outline-none transition-all`}
                       />
+                      {emailError && (
+                        <p className="text-xs text-rose-400 font-mono mt-1">{emailError}</p>
+                      )}
                     </div>
                   </div>
 
@@ -262,19 +299,19 @@ export default function Contact() {
                     {status === 'submitting' ? (
                       <>
                         <span className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
-                        Transmitting Package...
+                        TRANSMITTING PACKAGE...
                       </>
                     ) : (
                       <>
                         <Send size={16} className="group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-all" />
-                        Send Secured Message
+                        SEND SECURED MESSAGE
                       </>
                     )}
                   </button>
 
                   <div className="flex items-start gap-1.5 text-[10px] font-mono text-slate-500">
                     <Info size={12} className="shrink-0 mt-0.5" />
-                    <span>Submitted inquiries are saved in client session storage context. Privacy protected.</span>
+                    <span>Your message will be delivered directly to my inbox. I typically respond within 24–48 hours.</span>
                   </div>
 
                 </form>
