@@ -76,11 +76,37 @@ export const PROJECTS: Project[] = [
     detailedDescription: 'Wanderlust connects travelers with peer-to-peer listings worldwide. Built using the MERN stack, it features seamless image uploads via Cloudinary, integrated interactive maps for location exploration, strict schema validations, and a robust user feedback loop with nested reviews.',
     image: 'https://i.ibb.co/nNPytp11/Screenshot-2026-06-17-at-8-21-35-AM.jpg',
     techStack: ['React', 'Node.js', 'Express', 'MongoDB', 'Tailwind CSS', 'Mapbox', 'JWT'],
-    features: ['Secure User Authentication', 'Dynamic Peer Reviews & Ratings', 'Geospatial Search & Maps Integration', 'Image Storage & Cloud Hosting'],
+    features: ['Listing Management', 'Secure Authentication', 'Reviews System', 'Image Uploads', 'Interactive Maps', 'Search & Discovery'],
     liveUrl: 'https://wanderlust-3sg5.onrender.com/listings',
     githubUrl: 'https://github.com/theharsh999/WanderLust',
     featured: true,
-    category: 'Full-Stack'
+    category: 'Full-Stack',
+    caseStudy: {
+      overview: 'Wanderlust is a full-stack travel accommodation platform inspired by Airbnb. Users can browse travel listings, create listings, upload property images, view listing details, leave reviews, search destinations, and explore locations through maps. The platform focuses on providing a seamless booking-style experience while demonstrating full-stack web development concepts.',
+      problem: 'Many travel accommodation platforms require a complete ecosystem involving listings, reviews, image storage, authentication, and location services. The challenge was creating a platform that replicates real-world travel marketplace workflows while maintaining scalability and clean architecture.',
+      solution: 'Built Wanderlust using the MVC architecture with a full-stack implementation that combines backend APIs, secure authentication, cloud image storage, reviews, and map-based location services. The application provides an end-to-end accommodation discovery experience.',
+      challenges: [
+        'Authentication & Authorization: Implemented secure access control to ensure only owners can modify listings.',
+        'Image Management: Integrated cloud image storage while handling upload and deletion workflows.',
+        'Data Relationships: Designed relationships between users, listings, and reviews.',
+        'Map Integration: Connected location data with map visualization for better user experience.'
+      ],
+      outcomes: [
+        'Successfully built a production-style full-stack platform.',
+        'Implemented complete CRUD functionality.',
+        'Integrated multiple third-party services.',
+        'Demonstrated scalable MVC architecture.',
+        'Created a real-world Airbnb-inspired application.'
+      ],
+      metrics: [
+        { label: 'Development Type', value: 'Full-Stack Web Application' },
+        { label: 'Architecture', value: 'MVC' },
+        { label: 'Database', value: 'MongoDB' },
+        { label: 'Authentication', value: 'Passport.js' },
+        { label: 'Cloud Storage', value: 'Cloudinary' },
+        { label: 'Status', value: 'Completed & Portfolio Ready' }
+      ]
+    }
   },
   {
     id: 'fixmycampus',
@@ -89,11 +115,37 @@ export const PROJECTS: Project[] = [
     detailedDescription: 'Designed to bridge student concerns and facility operations. Built with speed and state-governed forms, the application assigns complaints dynamically, updates issues in real-time, displays progress status indicators, and provides administrative oversight with aggregated charts.',
     image: 'https://i.ibb.co/5gn902Z4/Whats-App-Image-2026-04-02-at-21-44-57.jpg',
     techStack: ['React', 'Node.js', 'Express', 'MongoDB', 'Tailwind CSS', 'ChartJS'],
-    features: ['Automated Urgent Escalation', 'Comprehensive Admin Command Deck', 'Real-Time Complaint Logging', 'Secure Department Logins'],
+    features: ['Issue Reporting', 'Status Tracking', 'Admin Dashboard', 'User Authentication', 'Category Management', 'Resolution Workflow'],
     liveUrl: 'https://fix-my-campus-nine.vercel.app',
     githubUrl: 'https://github.com/theharsh999/FixMyCampus',
     featured: true,
-    category: 'Full-Stack'
+    category: 'Full-Stack',
+    caseStudy: {
+      overview: 'FixMyCampus is a campus issue reporting and management platform designed to streamline communication between students and administration. The platform enables students to submit issues related to infrastructure, maintenance, facilities, and campus services while providing administrators with tools to track and manage resolutions.',
+      problem: 'Campus complaints are often handled through informal channels, making it difficult to track issue status and ensure accountability. Students lack transparency while administrators struggle to manage reports efficiently.',
+      solution: 'Built a centralized issue-tracking platform where students can raise complaints, monitor progress, and receive updates while administrators can organize, assign, and resolve issues through a structured workflow.',
+      challenges: [
+        'Role-Based Access: Implemented separate workflows for students and administrators.',
+        'Complaint Lifecycle: Designed a structured status management system.',
+        'Database Design: Created scalable models for users, complaints, and updates.',
+        'Dashboard Experience: Built interfaces that simplify issue management.'
+      ],
+      outcomes: [
+        'Improved complaint reporting workflow.',
+        'Centralized issue management.',
+        'Reduced manual tracking complexity.',
+        'Demonstrated practical MERN-stack development skills.',
+        'Built a real-world campus utility platform.'
+      ],
+      metrics: [
+        { label: 'Development Type', value: 'MERN Stack Application' },
+        { label: 'Primary Users', value: 'Students & Administrators' },
+        { label: 'Core Function', value: 'Issue Tracking' },
+        { label: 'Architecture', value: 'Client-Server' },
+        { label: 'Database', value: 'MongoDB' },
+        { label: 'Status', value: 'Completed & Portfolio Ready' }
+      ]
+    }
   }
 ];
 
