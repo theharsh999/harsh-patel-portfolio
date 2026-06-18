@@ -91,10 +91,10 @@ export default function Projects() {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] font-mono text-amber-400 font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-amber-400/10 border border-amber-400/20">
-                      {project.category}
+                      {project.categoryBadge || project.category}
                     </span>
                     <span className="text-[10px] font-mono text-slate-500">
-                      MERN Architecture
+                      {project.architectureLabel || 'MERN Architecture'}
                     </span>
                   </div>
 
@@ -223,41 +223,129 @@ export default function Projects() {
               {/* Modal right side scrolling logic, text challenge */}
               <div className="w-full md:w-1/2 p-6 sm:p-8 overflow-y-auto flex flex-col justify-between gap-6">
                 <div className="space-y-6">
-                  <div>
-                    <h4 className="text-xs font-mono font-semibold uppercase tracking-widest text-slate-400 mb-2">
-                      Project Objective
-                    </h4>
-                    <p className="font-sans text-xs sm:text-sm text-slate-200 leading-relaxed">
-                      {selectedProject.detailedDescription || selectedProject.description}
-                    </p>
-                  </div>
+                  {selectedProject.caseStudy ? (
+                    <>
+                      {/* Rich Case Study Layout */}
+                      <div>
+                        <h4 className="text-xs font-mono font-semibold uppercase tracking-widest text-amber-400 mb-2">
+                          01 // Project Overview
+                        </h4>
+                        <p className="font-sans text-xs sm:text-sm text-slate-200 leading-relaxed">
+                          {selectedProject.caseStudy.overview}
+                        </p>
+                      </div>
 
-                  <div>
-                    <h4 className="text-xs font-mono font-semibold uppercase tracking-widest text-slate-400 mb-3 flex items-center gap-1">
-                      <Sparkles size={12} className="text-amber-400" />
-                      Core Functions Engineered
-                    </h4>
-                    
-                    <div className="grid grid-cols-1 gap-2">
-                      {selectedProject.features.map((feature, i) => (
-                        <div key={i} className="flex items-start gap-2 text-xs text-slate-300">
-                          <Check size={14} className="text-amber-400 shrink-0 mt-0.5 bg-amber-400/10 p-0.5 rounded-full" />
-                          <span>{feature}</span>
+                      <div>
+                        <h4 className="text-xs font-mono font-semibold uppercase tracking-widest text-rose-400 mb-2">
+                          02 // The Problem
+                        </h4>
+                        <p className="font-sans text-xs sm:text-sm text-slate-300 leading-relaxed">
+                          {selectedProject.caseStudy.problem}
+                        </p>
+                      </div>
+
+                      <div>
+                        <h4 className="text-xs font-mono font-semibold uppercase tracking-widest text-emerald-400 mb-2">
+                          03 // The Solution
+                        </h4>
+                        <p className="font-sans text-xs sm:text-sm text-slate-200 leading-relaxed">
+                          {selectedProject.caseStudy.solution}
+                        </p>
+                      </div>
+
+                      <div>
+                        <h4 className="text-xs font-mono font-semibold uppercase tracking-widest text-slate-400 mb-3 flex items-center gap-1">
+                          <Sparkles size={12} className="text-amber-400" />
+                          04 // Key Features Embedded
+                        </h4>
+                        <div className="grid grid-cols-1 gap-2">
+                          {selectedProject.features.map((feature, i) => (
+                            <div key={i} className="flex items-start gap-2 text-xs text-slate-300">
+                              <Check size={14} className="text-amber-400 shrink-0 mt-0.5 bg-amber-400/10 p-0.5 rounded-full" />
+                              <span>{feature}</span>
+                            </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
-                  </div>
+                      </div>
 
-                  {/* Architecture blueprint */}
-                  <div className="p-3 bg-slate-900 border border-white/[0.05] rounded-lg">
-                    <p className="text-[10px] font-mono text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1">
-                      <Code size={12} className="text-amber-400" />
-                      Infrastructure Specs
-                    </p>
-                    <p className="text-[11px] font-mono text-slate-300 leading-relaxed">
-                      Stateless JWT Auth, responsive Tailwind structures, and localized query indexing.
-                    </p>
-                  </div>
+                      <div className="grid grid-cols-2 gap-3 pt-2">
+                        {selectedProject.caseStudy.metrics.map((metric, i) => (
+                          <div key={i} className="p-3 bg-white/[0.03] border border-white/[0.05] rounded-xl flex flex-col justify-between">
+                            <span className="text-[9px] font-mono text-slate-400 uppercase tracking-widest">{metric.label}</span>
+                            <span className="text-xs font-mono font-bold text-amber-400 mt-1">{metric.value}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div>
+                        <h4 className="text-xs font-mono font-semibold uppercase tracking-widest text-amber-400 mb-3 flex items-center gap-1">
+                          <ShieldCheck size={12} className="text-rose-400" />
+                          05 // Technical Challenges & Optimizations
+                        </h4>
+                        <div className="space-y-3">
+                          {selectedProject.caseStudy.challenges.map((challenge, i) => (
+                            <div key={i} className="p-3 bg-rose-950/20 border border-rose-500/10 rounded-lg text-xs text-slate-300 leading-relaxed">
+                              {challenge}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div>
+                        <h4 className="text-xs font-mono font-semibold uppercase tracking-widest text-emerald-400 mb-3 flex items-center gap-1">
+                          <Check size={12} className="text-emerald-400" />
+                          06 // Quantified Outcomes
+                        </h4>
+                        <div className="space-y-2">
+                          {selectedProject.caseStudy.outcomes.map((outcome, i) => (
+                            <div key={i} className="flex items-start gap-2 text-xs text-slate-300">
+                              <span className="text-emerald-400 font-mono">✓</span>
+                              <span>{outcome}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      {/* Existing standard project details fallback */}
+                      <div>
+                        <h4 className="text-xs font-mono font-semibold uppercase tracking-widest text-slate-400 mb-2">
+                          Project Objective
+                        </h4>
+                        <p className="font-sans text-xs sm:text-sm text-slate-200 leading-relaxed">
+                          {selectedProject.detailedDescription || selectedProject.description}
+                        </p>
+                      </div>
+
+                      <div>
+                        <h4 className="text-xs font-mono font-semibold uppercase tracking-widest text-slate-400 mb-3 flex items-center gap-1">
+                          <Sparkles size={12} className="text-amber-400" />
+                          Core Functions Engineered
+                        </h4>
+                        
+                        <div className="grid grid-cols-1 gap-2">
+                          {selectedProject.features.map((feature, i) => (
+                            <div key={i} className="flex items-start gap-2 text-xs text-slate-300">
+                              <Check size={14} className="text-amber-400 shrink-0 mt-0.5 bg-amber-400/10 p-0.5 rounded-full" />
+                              <span>{feature}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Architecture blueprint */}
+                      <div className="p-3 bg-slate-900 border border-white/[0.05] rounded-lg">
+                        <p className="text-[10px] font-mono text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1">
+                          <Code size={12} className="text-amber-400" />
+                          Infrastructure Specs
+                        </p>
+                        <p className="text-[11px] font-mono text-slate-300 leading-relaxed">
+                          Stateless JWT Auth, responsive Tailwind structures, and localized query indexing.
+                        </p>
+                      </div>
+                    </>
+                  )}
                 </div>
 
                  {/* Bottom links */}

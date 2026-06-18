@@ -15,6 +15,16 @@ export interface Project {
   githubUrl?: string;
   featured: boolean;
   category: 'Full-Stack' | 'Frontend' | 'System';
+  categoryBadge?: string;
+  architectureLabel?: string;
+  caseStudy?: {
+    overview: string;
+    problem: string;
+    solution: string;
+    challenges: string[];
+    outcomes: string[];
+    metrics: { label: string; value: string }[];
+  };
 }
 
 export interface Skill {

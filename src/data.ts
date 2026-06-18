@@ -26,6 +26,50 @@ export const PERSONAL_INFO = {
 
 export const PROJECTS: Project[] = [
   {
+    id: 'resumeedge',
+    title: 'ResumeEdge',
+    description: 'An ATS-friendly resume builder featuring live editing, multiple templates, real-time preview, and professional PDF export.',
+    detailedDescription: 'ResumeEdge is a modern ATS-friendly resume builder designed to help students, job seekers, and professionals create polished resumes quickly without relying on paid platforms. The platform focuses on simplicity, real-time editing, template customization, and professional PDF exports.',
+    image: 'https://i.ibb.co/YBwRLgF0/Screenshot-2026-06-18-at-3-34-08-PM.jpg',
+    techStack: ['React', 'JavaScript', 'Tailwind CSS', 'Vite', 'HTML2Canvas', 'jsPDF', 'Vercel'],
+    features: [
+      'Live Resume Builder: Users can edit resume information and instantly see updates reflected in the preview.',
+      'Multiple Templates: Users can switch between professional templates without losing data.',
+      'ATS-Friendly Layouts: Templates are designed to maintain clean structure and readability.',
+      'PDF Export: Users can export resumes in high-quality PDF format.',
+      'Responsive UI: Works smoothly across desktop and laptop screens.'
+    ],
+    liveUrl: 'https://resume-edge-ai.vercel.app/',
+    githubUrl: 'https://github.com/theharsh999/resume-edge',
+    featured: true,
+    category: 'Frontend',
+    categoryBadge: 'AI TOOL',
+    architectureLabel: 'React Architecture',
+    caseStudy: {
+      overview: 'ResumeEdge is a modern ATS-friendly resume builder designed to help students, job seekers, and professionals create polished resumes quickly without relying on paid platforms. The platform focuses on simplicity, real-time editing, template customization, and professional PDF exports. Users can create resumes from scratch, switch between multiple templates, customize layout and styling, preview changes instantly, and export resumes as professional PDFs.',
+      problem: 'Most free resume builders suffer from one or more of these issues: limited templates, watermarked exports, poor ATS compatibility, no live preview, poor mobile responsiveness, and paid subscription requirements. The goal was to build a completely free and modern resume builder that solves these problems.',
+      solution: 'Developed ResumeEdge as a single-page web application featuring real-time resume editing, live synchronized preview, multiple ATS-friendly templates, template customization, professional PDF export, responsive design, and fast client-side rendering. The application provides a seamless workflow from resume creation to final export.',
+      challenges: [
+        'Accurate PDF Export: One major challenge was ensuring exported PDFs matched the on-screen preview. Issues included font rendering differences, layout shifts, section divider alignment, and color inconsistencies. These were resolved through multiple export optimizations and rendering adjustments.',
+        'Template Consistency: Maintaining consistent styling and spacing across multiple templates required reusable component architecture and shared styling systems.'
+      ],
+      outcomes: [
+        'Successfully built and deployed a fully functional resume builder.',
+        'Implemented multiple professional templates.',
+        'Achieved real-time editing and preview synchronization.',
+        'Delivered high-quality PDF exports.',
+        'Created a portfolio-ready SaaS-style project.'
+      ],
+      metrics: [
+        { label: 'Development Time', value: '2 Weeks' },
+        { label: 'Templates', value: '3 Professional Templates' },
+        { label: 'Export Format', value: 'PDF' },
+        { label: 'Deployment', value: 'Vercel' },
+        { label: 'Status', value: 'Live Production Build' }
+      ]
+    }
+  },
+  {
     id: 'wanderlust',
     title: 'Wanderlust',
     description: 'A premium travel booking platform inspired by Airbnb, engineered with scalable server layouts, user authentication, and interactive map interfaces.',
