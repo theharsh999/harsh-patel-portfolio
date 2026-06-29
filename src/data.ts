@@ -14,7 +14,7 @@ export const PERSONAL_INFO = {
   email: 'harshpatelji999@gmail.com',
   github: 'https://github.com/theharsh999', // standard links
   linkedin: 'https://linkedin.com',
-  resumeUrl: 'https://drive.google.com/file/d/1xKG7Z3_fCvPa6aJ39pck4a7hrRIymY7S/view?usp=sharing',
+  resumeUrl: 'https://drive.google.com/file/d/1KaE0gXzUf-KvPi523FK3sRzaWC0h0iV4/view?usp=sharing',
   aboutIntro: 'I am an Information Technology Engineering student, Full Stack Developer, Hackathon enthusiast, and persistent Problem Solver. With a strong engineering foundation and over 2 years of deep hands-on learning, I enjoy conceptualizing clean web architectures, composing scalable REST APIs, and launching responsive, user-first frontends.',
   stats: [
     { value: '9.0+', label: 'CGPA Score', sub: 'TCET Engineering' },
